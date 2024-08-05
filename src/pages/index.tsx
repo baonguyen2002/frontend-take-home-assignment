@@ -1,3 +1,5 @@
+import * as Tabs from '@radix-ui/react-tabs'
+
 import { CreateTodoForm } from '@/client/components/CreateTodoForm'
 import { TodoList } from '@/client/components/TodoList'
 
@@ -16,6 +18,42 @@ import { TodoList } from '@/client/components/TodoList'
  *  - https://www.radix-ui.com/docs/primitives/components/tabs
  */
 
+const TabFilter = () => {
+  return (
+    <Tabs.Root defaultValue="all">
+      <Tabs.List className="mb-10 flex gap-2" aria-label="Filter todos">
+        <Tabs.Trigger
+          value="all"
+          className="rounded-full border border-gray-300 px-6 py-3 text-sm font-bold data-[state=active]:border-gray-700 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+        >
+          All
+        </Tabs.Trigger>
+        <Tabs.Trigger
+          value="pending"
+          className="rounded-full border border-gray-300 px-6 py-3 text-sm font-bold data-[state=active]:border-gray-700 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+        >
+          Pending
+        </Tabs.Trigger>
+        <Tabs.Trigger
+          value="completed"
+          className="rounded-full border border-gray-300 px-6 py-3 text-sm font-bold data-[state=active]:border-gray-700 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+        >
+          Completed
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content className="TabsContent" value="all">
+        <TodoList type="all" />
+      </Tabs.Content>
+      <Tabs.Content className="TabsContent" value="pending">
+        <TodoList type="pending" />
+      </Tabs.Content>
+      <Tabs.Content className="TabsContent" value="completed">
+        <TodoList type="completed" />
+      </Tabs.Content>
+    </Tabs.Root>
+  )
+}
+
 const Index = () => {
   return (
     <main className="mx-auto w-[480px] pt-12">
@@ -25,7 +63,7 @@ const Index = () => {
         </h1>
 
         <div className="pt-10">
-          <TodoList />
+          <TabFilter />
         </div>
 
         <div className="pt-10">
